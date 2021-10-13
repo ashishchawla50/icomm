@@ -2,8 +2,6 @@ import { Box, Button, Container, Grid, Stack, TextField } from "@mui/material";
 import React, { FC } from "react";
 import useStyles from "./style";
 
-// import useStyles from "./styles";
-
 export const QuickFilter: FC<any> = (props) => {
   const classes = useStyles();
 
