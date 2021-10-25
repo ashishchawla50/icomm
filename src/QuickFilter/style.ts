@@ -10,6 +10,17 @@ const useStyles :any= makeStyles((theme: Theme) =>
       border:'1px solid #bbb',
       borderRadius: 12,
       marginTop:16
+    },
+    errorSpace:{
+      float: 'left', 
+      height: 0,
+      width: '100%'
+    },
+    datePicker:{
+      
+      "& .MuiFormControl-root":{
+        width:"100%"
+      }
     }
   }),
 );
