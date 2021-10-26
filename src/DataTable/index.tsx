@@ -6,11 +6,20 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { getGridUtilityClass } from '@mui/material';
-
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 
 export default function DataTable() {
+  const[tablevalue, setTablevalue]= useState<TableData>([]);
+  
+  useEffect(() => {
+    
+    axios.get<TableData>('http://localhost:3000/data')
+    .then((response) => {
+        setTablevalue(response.data);
+    });
+}, []);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -25,9 +34,9 @@ export default function DataTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {tablevalue.map((row ,i) => (
             <TableRow
-              key={row.message_id}
+              key={i}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="right">
@@ -45,21 +54,14 @@ export default function DataTable() {
     </TableContainer>
   );
 }
-function createTable(
-    message_id:string,
+interface createTable{    
+  message_id:string,
     customer_id: string,
     customer_mobile_number: number,
     customer_email_address: string,
     message_sent_start_date: string,
     message_sent_end_date: string,
-  ) {
-    return { message_id,customer_id, customer_mobile_number, customer_email_address, message_sent_start_date, message_sent_end_date };
-  }
+ }
+ export type TableData = createTable[]
+ 
   
-  const rows = [
-    createTable('123456','123', 1000001, "xyz@xyz.com", "18-Oct-21", "25-Oct-21"),
-    createTable('123456','1234', 1000001, "xyz@xyz.com", "18-Oct-21", "25-Oct-21"),
-    createTable('123456','1432', 1000001, "xyz@xyz.com", "18-Oct-21", "25-Oct-21"),
-    createTable('123456','1001', 1000001, "xyz@xyz.com","18-Oct-21", "25-Oct-21"),
-    createTable('123456','1001', 100011, "xyz@xyz.com", "18-Oct-21", "25-Oct-21"),
-  ];

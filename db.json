@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+         "id": 1,
+       "message_id": "123456", 
+       "customer_id": "123123" ,
+       "customer_mobile_number":1000001,
+       "customer_email_address":"xyz@xyz.com",
+       "message_sent_start_date":"18-Oct-21",
+       "message_sent_end_date":"25-Oct-21"
+
+      },
+      {
+        "id": 2,
+        "message_id": "123456", 
+        "customer_id": "123789" ,
+        "customer_mobile_number":1000002,
+        "customer_email_address":"xyz@xyz.com",
+        "message_sent_start_date":"18-Oct-21",
+        "message_sent_end_date":"25-Oct-21"
+
+       },
+       {
+          "id": 3,
+          "message_id": "123456", 
+          "customer_id": "123986" ,
+          "customer_mobile_number":1000003,
+          "customer_email_address":"xyz@xyz.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 4,
+          "message_id": "123456", 
+          "customer_id": "123984" ,
+          "customer_mobile_number":1000005,
+          "customer_email_address":"xyz@xyz.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         }
+  ]
+}
