@@ -1,12 +1,13 @@
 import { DateTimePicker, LocalizationProvider } from "@mui/lab";
 import { Box, Button, Container, Grid, Stack, TextField } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import TextInput from "../TextInput";
 import useStyles from "./style";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { CSVLink, CSVDownload } from "react-csv";
+import * as api from "./api";
 
 export const QuickFilter: FC<any> = (props) => {
   const classes = useStyles();
@@ -17,12 +18,10 @@ export const QuickFilter: FC<any> = (props) => {
 
   const [customerMobile, setCustomerMobile] = React.useState("");
   const [customerEmail, setCustomerEmail] = React.useState("");
-  const [selectedStartDate, setSelectedStartDate] = React.useState(
-    new Date("2018-01-01T00:00:00.000Z")
-  );
-  const [selectedEndDate, setSelectedEndDate] = React.useState(
-    new Date("2018-01-01T00:00:00.000Z")
-  );
+  const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
+  const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
+  const [messageData, setMessaageData] = React.useState<any>();
+  const [messageDataOriginal, setMessaageDataOriginal] = React.useState<any>();
   const DOWNLOAD_HEADERS = [["NAME", "MESSAGE"]];
   const DOWNLOAD_DATA = [
     { name: "Keanu Reeves", msg: "Actor" },
@@ -142,6 +141,40 @@ export const QuickFilter: FC<any> = (props) => {
     });
     doc.save("messages.pdf");
   };
+
+  useEffect(() => {
+    api.getMessageData().then((response: any) => {
+      setMessaageData(response.data);
+      setMessaageDataOriginal(response.data);
+    });
+  }, []);
+
+  const handleApply = () => {
+    let tempMessageData = [...messageDataOriginal];
+    if (messageID.length) {
+      tempMessageData = tempMessageData.filter((e: any) =>
+        e.message_id.includes(messageID)
+      );
+    }
+    if (customerID.length) {
+      tempMessageData = tempMessageData.filter((e: any) =>
+        e.customer_id.includes(customerID)
+      );
+    }
+    if (customerMobile.length) {
+      tempMessageData = tempMessageData.filter((e: any) =>
+        e.customer_mobile_number.toString().includes(customerMobile)
+      );
+    }
+    if (customerEmail.length) {
+      tempMessageData = tempMessageData.filter((e: any) =>
+        e.customer_email_address.includes(customerEmail)
+      );
+    }
+    setMessaageData(tempMessageData);
+    props.handleFilteredData(tempMessageData);
+    //console.log(tempMessageData);
+  };
   return (
     <>
       <Container maxWidth="md">
@@ -162,13 +195,13 @@ export const QuickFilter: FC<any> = (props) => {
                 savedValue={""}
                 data-testid="messsage-id-text"
               />
-              <Box className={classes.errorSpace}>
+              {/* <Box className={classes.errorSpace}>
                 {messageID.length && messageID.length !== 10 ? (
                   <small className="error">
                     Message ID is length should be 10
                   </small>
                 ) : null}
-              </Box>
+              </Box> */}
             </Grid>
             <Grid item xs={6} pb={3}>
               <TextInput
@@ -179,13 +212,13 @@ export const QuickFilter: FC<any> = (props) => {
                 savedValue={""}
                 data-testid="customer-id-text"
               />
-              <Box className={classes.errorSpace}>
+              {/* <Box className={classes.errorSpace}>
                 {customerID.length && customerID.length !== 12 ? (
                   <small className="error">
                     Customer ID is length should be 12
                   </small>
                 ) : null}
-              </Box>
+              </Box> */}
             </Grid>
             <Grid item xs={6} pb={3}>
               <TextInput
@@ -196,13 +229,13 @@ export const QuickFilter: FC<any> = (props) => {
                 savedValue={""}
                 data-testid="customer-mobile-number-text"
               />
-              <Box className={classes.errorSpace}>
+              {/* <Box className={classes.errorSpace}>
                 {customerMobile.length && customerMobile.length !== 10 ? (
                   <small className="error">
                     Customer Mobile is length should be 10
                   </small>
                 ) : null}
-              </Box>
+              </Box> */}
             </Grid>
             <Grid item xs={6} pb={3}>
               <TextInput
@@ -213,11 +246,11 @@ export const QuickFilter: FC<any> = (props) => {
                 savedValue={""}
                 data-testid="customer-email-id-text"
               />
-              <Box className={classes.errorSpace}>
+              {/* <Box className={classes.errorSpace}>
                 {customerEmail.length && !EMAIL_REGEX.test(customerEmail) ? (
                   <small className="error">Customer Email is invalid</small>
                 ) : null}
-              </Box>
+              </Box> */}
             </Grid>
             <Grid item xs={6}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -246,7 +279,18 @@ export const QuickFilter: FC<any> = (props) => {
             <Grid item xs={12} pb={1}>
               <Stack spacing={2} justifyContent="end" direction="row">
                 <Button variant="contained">Reset</Button>
-                <Button variant="outlined" disabled={!isAllFieldsValid()}>
+                <Button
+                  variant="outlined"
+                  onClick={handleApply}
+                  disabled={
+                    !(
+                      messageID.length > 0 ||
+                      customerID.length > 0 ||
+                      customerMobile.length > 0 ||
+                      customerEmail.length > 0
+                    )
+                  }
+                >
                   Apply
                 </Button>
               </Stack>
