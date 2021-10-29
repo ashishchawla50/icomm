@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { QuickFilter } from "./QuickFilter";
 import DataTable from "./DataTable";
+import { Filter } from "./Filter";
 
 function App() {
   const [messageData, setMessageData] = React.useState<any>();
@@ -11,7 +12,8 @@ function App() {
   };
   return (
     <div className="App">
-      <QuickFilter handleFilteredData={handleFilteredData} />
+      {/* <QuickFilter handleFilteredData={handleFilteredData} /> */}
+      <Filter handleFilteredData={handleFilteredData} />
       <DataTable messageData={messageData} />
     </div>
   );
