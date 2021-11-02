@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
-import { QuickFilter } from "./QuickFilter";
-import DataTable from "./DataTable";
+// import { QuickFilter } from "./QuickFilter";
 import { Filter } from "./Filter";
+import DataTable from "./TableData";
+
 
 function App() {
   const [messageData, setMessageData] = React.useState<any>();

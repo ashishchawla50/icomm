@@ -15,7 +15,7 @@
         "message_id": "2", 
         "customer_id": "c2" ,
         "customer_mobile_number":983274,
-        "customer_email_address":"gaurav.sharma@ibm.com",
+        "customer_email_address":"gaurav.kumar.sharma@ibm.com",
         "message_sent_start_date":"18-Oct-21",
         "message_sent_end_date":"25-Oct-21"
 
@@ -33,6 +33,176 @@
          {
           "id": 4,
           "message_id": "4", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 5,
+          "message_id": "5", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 6,
+          "message_id": "6", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 7,
+          "message_id": "7", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 8,
+          "message_id": "8", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 9,
+          "message_id": "9", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 10,
+          "message_id": "10", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 11,
+          "message_id": "11", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 12,
+          "message_id": "12", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 13,
+          "message_id": "13", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 14,
+          "message_id": "14", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 15,
+          "message_id": "15", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 16,
+          "message_id": "16", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 17,
+          "message_id": "17", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 18,
+          "message_id": "18", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 19,
+          "message_id": "19", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 20,
+          "message_id": "20", 
+          "customer_id": "c4" ,
+          "customer_mobile_number":803023,
+          "customer_email_address":"abc@abc.com",
+          "message_sent_start_date":"18-Oct-21",
+          "message_sent_end_date":"25-Oct-21"
+ 
+         },
+         {
+          "id": 21,
+          "message_id": "21", 
           "customer_id": "c4" ,
           "customer_mobile_number":803023,
           "customer_email_address":"abc@abc.com",
