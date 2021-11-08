@@ -17,10 +17,17 @@ const useStyles :any= makeStyles((theme: Theme) =>
       width: '100%'
     },
     datePicker:{
-      
       "& .MuiFormControl-root":{
         width:"100%"
       }
+    },
+    checkBox:{
+      border: "1px solid #b7b3b3",
+      padding: "6px 10px",
+      borderRadius: 5
+    },
+    selectBox:{
+      textAlign:"left"
     }
   }),
 );

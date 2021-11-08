@@ -1,5 +1,19 @@
 import { DateTimePicker, LocalizationProvider } from "@mui/lab";
-import { Box, Button, Container, Grid, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from "@mui/material";
 import React, { FC, useEffect } from "react";
 import TextInput from "../TextInput";
 import useStyles from "./style";
@@ -124,14 +138,79 @@ export const Filter: FC<any> = (props) => {
       );
     }
     setMessaageData(tempMessageData);
-    props.handleFilteredData(tempMessageData);
+    props.handleFilteredData(
+      tempMessageData,
+      icommCheck ? "0" : "1",
+      icommCheck ? dataDropDown : "0"
+    );
     //console.log(tempMessageData);
   };
+  const [dataDropDown, setDataDropDown] = React.useState("1");
+  const [icommCheck, setIcommCheck] = React.useState(true);
+  const [icomm2Check, setIcomm2Check] = React.useState(false);
+  const handleChange = (event: any) => {
+    setDataDropDown(event.target.value);
+  };
+
   return (
     <>
       <Container maxWidth="md">
         <Box className={classes.filterWrapper}>
           <Grid container spacing={2} p={2}>
+            <Grid item xs={3} pb={3}>
+              <FormGroup className={classes.checkBox}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      defaultChecked
+                      checked={icommCheck}
+                      onClick={() => {
+                        setIcomm2Check(false);
+                        setIcommCheck(true);
+                      }}
+                    />
+                  }
+                  label="iComm"
+                />
+              </FormGroup>
+            </Grid>
+            <Grid item xs={3} pb={3}>
+              <FormGroup className={classes.checkBox}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={icomm2Check}
+                      onClick={() => {
+                        setIcommCheck(false);
+                        setIcomm2Check(true);
+                      }}
+                    />
+                  }
+                  label="PNS Logs"
+                />
+              </FormGroup>
+            </Grid>
+            <Grid item xs={6} pb={3}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  {icommCheck ? "IComm" : "PNS Logs"}
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={dataDropDown}
+                  label={icommCheck ? "IComm" : "PNS Logs"}
+                  onChange={handleChange}
+                  disabled={!icommCheck}
+                  className={classes.selectBox}
+                >
+                  <MenuItem value={0}>SMS</MenuItem>
+                  <MenuItem value={1}>{icommCheck ? "Email" : "SMS"}</MenuItem>
+                  <MenuItem value={2}>Push </MenuItem>
+                  <MenuItem value={3}>Inbox </MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
             <Grid item xs={6} pb={3}>
               <TextField
                 fullWidth
