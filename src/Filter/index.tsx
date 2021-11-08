@@ -7,9 +7,12 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  FormLabel,
   Grid,
   InputLabel,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   Stack,
   TextField,
@@ -58,6 +61,7 @@ export const Filter: FC<any> = (props) => {
     { label: "Message End Date", key: "message_sent_end_date" },
   ];
 
+  const CHANNEL_TYPE_ICOMM = ["SMS", "Email", "Push", "Inbox"];
   const handleStartDateChange = (newValue: any) => {
     setSelectedStartDate(newValue);
   };
@@ -140,18 +144,16 @@ export const Filter: FC<any> = (props) => {
     setMessaageData(tempMessageData);
     props.handleFilteredData(
       tempMessageData,
-      icommCheck ? "0" : "1",
-      icommCheck ? dataDropDown : "0"
+      isICommChecked ? "0" : "1",
+      isICommChecked ? dataDropDown : "0"
     );
     //console.log(tempMessageData);
   };
   const [dataDropDown, setDataDropDown] = React.useState("1");
-  const [icommCheck, setIcommCheck] = React.useState(true);
-  const [icomm2Check, setIcomm2Check] = React.useState(false);
+  const [isICommChecked, setIsICommChecked] = React.useState(true);
   const handleChange = (event: any) => {
     setDataDropDown(event.target.value);
   };
-
   return (
     <>
       <Container maxWidth="md">
@@ -162,11 +164,9 @@ export const Filter: FC<any> = (props) => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      defaultChecked
-                      checked={icommCheck}
+                      checked={isICommChecked}
                       onClick={() => {
-                        setIcomm2Check(false);
-                        setIcommCheck(true);
+                        if (!isICommChecked) setIsICommChecked(!isICommChecked);
                       }}
                     />
                   }
@@ -179,10 +179,9 @@ export const Filter: FC<any> = (props) => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={icomm2Check}
+                      checked={!isICommChecked}
                       onClick={() => {
-                        setIcommCheck(false);
-                        setIcomm2Check(true);
+                        if (isICommChecked) setIsICommChecked(!isICommChecked);
                       }}
                     />
                   }
@@ -193,21 +192,22 @@ export const Filter: FC<any> = (props) => {
             <Grid item xs={6} pb={3}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
-                  {icommCheck ? "IComm" : "PNS Logs"}
+                  {isICommChecked ? "IComm" : "PNS Logs"}
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={dataDropDown}
-                  label={icommCheck ? "IComm" : "PNS Logs"}
+                  value={isICommChecked ? dataDropDown : "0"}
+                  label={isICommChecked ? "IComm" : "PNS Logs"}
                   onChange={handleChange}
-                  disabled={!icommCheck}
+                  disabled={!isICommChecked}
                   className={classes.selectBox}
                 >
-                  <MenuItem value={0}>SMS</MenuItem>
-                  <MenuItem value={1}>{icommCheck ? "Email" : "SMS"}</MenuItem>
-                  <MenuItem value={2}>Push </MenuItem>
-                  <MenuItem value={3}>Inbox </MenuItem>
+                  {CHANNEL_TYPE_ICOMM.map((e: any, index: number) => (
+                    <MenuItem key={index} value={index}>
+                      {e}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
