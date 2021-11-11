@@ -7,8 +7,16 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useState, useEffect } from "react";
+import Button from '@mui/material/Button';
+import Dialog, { DialogProps } from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useState, useEffect,useRef } from "react";
 import axios from "axios";
+import TableDetails from "../TableDetails";
+import ClearIcon from '@mui/icons-material/Clear';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -48,13 +56,15 @@ function stableSort<T>(
   });
   return stabilizedThis.map((el) => el[0]);
 }
+
 export default function DataTable(props: any) {
   const [page, setPage] = useState(0);
   const [tablevalue, setTablevalue] = useState<TableData>([]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof Data>("customer_id");
-
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState<DialogProps['scroll']>('paper');
   useEffect(() => {
     axios.get<TableData>("http://localhost:3000/data").then((response) => {
       setTablevalue(response.data);
@@ -83,6 +93,25 @@ export default function DataTable(props: any) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tablevalue.length) : 0;
 
+    const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
+      setOpen(true);
+      setScroll(scrollType);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    const descriptionElementRef = useRef<HTMLElement>(null);
+    useEffect(() => {
+      if (open) {
+        const { current: descriptionElement } = descriptionElementRef;
+        if (descriptionElement !== null) {
+          descriptionElement.focus();
+        }
+      }
+    }, [open]);
+    
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -96,6 +125,7 @@ export default function DataTable(props: any) {
                 <TableCell align="right">Customer Email Address</TableCell>
                 <TableCell align="right">Message Sent Start Date</TableCell>
                 <TableCell align="right">Message Sent End Date</TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -119,6 +149,10 @@ export default function DataTable(props: any) {
                       </TableCell>
                       <TableCell align="right">
                         {row.message_sent_end_date}
+                      </TableCell>
+                      <TableCell align="right">
+                      <Button onClick={handleClickOpen('paper')}>Details</Button>
+                      
                       </TableCell>
                     </TableRow>
                   );
@@ -145,10 +179,31 @@ export default function DataTable(props: any) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+        maxWidth="lg"
+  
+      >
+        <DialogTitle id="scroll-dialog-title"> <DialogActions>
+          <Button onClick={handleClose}><ClearIcon/></Button>
+         
+        </DialogActions></DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+          <DialogContentText>
+          <TableDetails/>
+          </DialogContentText>
+        </DialogContent>
+       
+      </Dialog>
     </Box>
   );
 }
 interface Data {
+  id:number,
   message_id: string;
   customer_id: string;
   customer_mobile_number: number;
@@ -158,6 +213,7 @@ interface Data {
 }
 
 interface createTable {
+  id:number,
   message_id: string;
   customer_id: string;
   customer_mobile_number: number;
